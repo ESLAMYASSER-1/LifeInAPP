@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:lifeinapp/data/firestor.dart';
-import 'package:lifeinapp/model/notes_model.dart';
+
+import '../model/deals_model.dart';
 
 Color custom_green = Color(0xff18DAA3);
 Color backgroundColors = Colors.grey.shade100;
 
-class Edit_Screen extends StatefulWidget {
-  Note _note;
-  Edit_Screen(this._note, {super.key});
+class Edit_Screen_Deals extends StatefulWidget {
+  Deal _deal;
+  Edit_Screen_Deals(this._deal, {super.key});
 
   @override
-  State<Edit_Screen> createState() => _Edit_ScreenState();
+  State<Edit_Screen_Deals> createState() => _Edit_Screen_DealsState();
 }
 
-class _Edit_ScreenState extends State<Edit_Screen> {
+class _Edit_Screen_DealsState extends State<Edit_Screen_Deals> {
   TextEditingController? title;
   TextEditingController? subtitle;
 
@@ -24,8 +25,8 @@ class _Edit_ScreenState extends State<Edit_Screen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    title = TextEditingController(text: widget._note.title);
-    subtitle = TextEditingController(text: widget._note.subtitle);
+    title = TextEditingController(text: widget._deal.title);
+    subtitle = TextEditingController(text: widget._deal.subtitle);
   }
 
   Widget build(BuildContext context) {
@@ -58,8 +59,8 @@ class _Edit_ScreenState extends State<Edit_Screen> {
             minimumSize: Size(170, 48),
           ),
           onPressed: () {
-            Firestore_Datasource().Update_Note(
-                widget._note.id, indexx, title!.text, subtitle!.text);
+            Firestore_Datasource().Update_Deals(
+                widget._deal.id, indexx, title!.text, subtitle!.text);
             Navigator.pop(context);
           },
           child: Text('add task'),

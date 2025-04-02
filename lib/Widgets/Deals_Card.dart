@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:lifeinapp/data/firestor.dart';
-import 'package:lifeinapp/model/notes_model.dart';
-import 'package:lifeinapp/Screens/edit_screen_Notes.dart';
+import '../Screens/edit_screen_Deals.dart';
+import '../model/deals_model.dart';
 
 Color custom_green = Color(0xff18DAA3);
 Color backgroundColors = Colors.grey.shade100;
 
-class Task_Widget extends StatefulWidget {
-  Note _note;
-  Task_Widget(this._note, {super.key});
+class Deals_Widget extends StatefulWidget {
+  Deal _deal;
+  Deals_Widget(this._deal, {super.key});
 
   @override
-  State<Task_Widget> createState() => _Task_WidgetState();
+  State<Deals_Widget> createState() => _Deals_WidgetState();
 }
 
-class _Task_WidgetState extends State<Task_Widget> {
+class _Deals_WidgetState extends State<Deals_Widget> {
   @override
   Widget build(BuildContext context) {
-    bool isDone = widget._note.isDon;
+    bool isDone = widget._deal.isDon;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Container(
@@ -53,7 +53,7 @@ class _Task_WidgetState extends State<Task_Widget> {
                       children: [
                         Expanded(
                           child: Text(
-                            widget._note.title,
+                            widget._deal.title,
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -68,14 +68,14 @@ class _Task_WidgetState extends State<Task_Widget> {
                               isDone = !isDone;
                             });
                             Firestore_Datasource()
-                                .isdone(widget._note.id, isDone);
+                                .isdone(widget._deal.id, isDone);
                           },
                         )
                       ],
                     ),
                     Expanded(
                       child: Text(
-                        widget._note.subtitle,
+                        widget._deal.subtitle,
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -116,7 +116,7 @@ class _Task_WidgetState extends State<Task_Widget> {
                   Image.asset('images/icon_time.png'),
                   SizedBox(width: 10),
                   Text(
-                    widget._note.time,
+                    widget._deal.time,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -131,7 +131,7 @@ class _Task_WidgetState extends State<Task_Widget> {
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Edit_Screen_Notes(widget._note),
+                builder: (context) => Edit_Screen_Deals(widget._deal),
               ));
             },
             child: Container(
@@ -174,7 +174,7 @@ class _Task_WidgetState extends State<Task_Widget> {
       decoration: BoxDecoration(
         color: Colors.white,
         image: DecorationImage(
-          image: AssetImage('images/${widget._note.image}.png'),
+          image: AssetImage('images/${widget._deal.image}.png'),
           fit: BoxFit.cover,
         ),
       ),
