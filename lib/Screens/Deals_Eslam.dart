@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:lifeinapp/Widgets/To_Stream_Deals.dart';
 import 'add_deal_screen.dart';
 
-class NotDoneList extends StatefulWidget {
-  const NotDoneList({super.key});
+class DealsEslam extends StatefulWidget {
+  const DealsEslam({super.key});
 
   @override
-  State<NotDoneList> createState() => _NotDoneListState();
+  State<DealsEslam> createState() => _DealsEslamState();
 }
 
 bool show = true;
 Color custom_green = Color(0xff18DAA3);
 Color backgroundColors = Colors.grey.shade100;
 
-class _NotDoneListState extends State<NotDoneList> {
+class _DealsEslamState extends State<DealsEslam> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
@@ -33,6 +33,7 @@ class _NotDoneListState extends State<NotDoneList> {
           visible: show,
           child: FloatingActionButton(
             onPressed: () {
+              print('add_deal');
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => Add_Deal(),
               ));

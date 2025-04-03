@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:lifeinapp/data/firestor.dart';
 import 'package:line_icons/line_icons.dart';
-
 import '../Widgets/Beautiful Button.dart';
-import '../Widgets/To_Do_Stream_notes.dart';
-import '../Widgets/To_Do_card.dart';
-import '../model/notes_model.dart';
+import 'Deals_Eslam.dart';
+import 'Deals_Salma.dart';
 import 'To_Do_List_Done.dart';
 import 'To_Do_List_not_Done.dart';
-import 'add_note_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Color custom_green = Color(0xff18DAA3);
@@ -57,9 +53,20 @@ class PagesState extends State<Main_Page> {
         children: [
           Padding(
             padding: const EdgeInsets.all(15.0),
-            child: Text(
-              'Do not pity the dead, Harry, pity the living, and above all those who live without love.',
-              style: beautifulTextStyle,
+            child: Column(
+              children: [
+                Text(
+                  'Do not pity the dead, Harry, pity the living, and above all those who live without love.',
+                  style: beautifulTextStyle,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  '                                   Dumbledore.',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
             ),
           ),
           Row(
@@ -92,10 +99,85 @@ class PagesState extends State<Main_Page> {
         ],
       );
     }),
-    const Text(
-      'Profile',
-      style: optionStyle,
-    ),
+    Builder(builder: (context) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                Text(
+                  'Always the tone of surprise.',
+                  style: beautifulTextStyle,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  '                Hermione Granger   Ron Weasley.',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              BeautifulButton(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DealsEslam(),
+                  ));
+                },
+                icon: Icons.man_2,
+                text: 'For Eslam',
+                colorm: Colors.blue.shade100,
+                colors: Colors.blue.shade700,
+              ),
+              BeautifulButton(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DealsSalma(),
+                  ));
+                },
+                icon: Icons.woman_2,
+                text: 'For Salma',
+                colorm: Colors.pink.shade100,
+                colors: Colors.pink.shade700,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              BeautifulButton(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DealsEslam(),
+                  ));
+                },
+                icon: Icons.man_2,
+                text: 'From Salma',
+                colorm: Colors.pink.shade700,
+                colors: Colors.pink.shade100,
+              ),
+              BeautifulButton(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => DealsSalma(),
+                  ));
+                },
+                icon: Icons.woman_2,
+                text: 'From Eslam',
+                colorm: Colors.blue.shade700,
+                colors: Colors.blue.shade100,
+              ),
+            ],
+          ),
+        ],
+      );
+    }),
     const Text(
       'Profile',
       style: optionStyle,
@@ -106,9 +188,20 @@ class PagesState extends State<Main_Page> {
         children: [
           Padding(
             padding: const EdgeInsets.all(15.0),
-            child: Text(
-              'Do not pity the dead, Harry, pity the living, and above all those who live without love.',
-              style: beautifulTextStyle,
+            child: Column(
+              children: [
+                Text(
+                  'Always the tone of surprise.',
+                  style: beautifulTextStyle,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  '                Hermione Granger   Ron Weasley.',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
             ),
           ),
           Row(
@@ -117,7 +210,7 @@ class PagesState extends State<Main_Page> {
               BeautifulButton(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => NotDoneList(),
+                    builder: (context) => DealsEslam(),
                   ));
                 },
                 icon: Icons.man_2,
@@ -128,7 +221,7 @@ class PagesState extends State<Main_Page> {
               BeautifulButton(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => DoneList(),
+                    builder: (context) => DealsSalma(),
                   ));
                 },
                 icon: Icons.woman_2,
@@ -221,5 +314,3 @@ class PagesState extends State<Main_Page> {
     );
   }
 }
-
-class To_do_list_card {}

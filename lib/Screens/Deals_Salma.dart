@@ -3,18 +3,18 @@ import 'package:lifeinapp/Widgets/To_Stream_Deals.dart';
 
 import 'add_deal_screen.dart';
 
-class NotDoneList extends StatefulWidget {
-  const NotDoneList({super.key});
+class DealsSalma extends StatefulWidget {
+  const DealsSalma({super.key});
 
   @override
-  State<NotDoneList> createState() => _NotDoneListState();
+  State<DealsSalma> createState() => _DealsSalmaState();
 }
 
 bool show = true;
 Color custom_green = Color(0xff18DAA3);
 Color backgroundColors = Colors.grey.shade100;
 
-class _NotDoneListState extends State<NotDoneList> {
+class _DealsSalmaState extends State<DealsSalma> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
@@ -43,7 +43,7 @@ class _NotDoneListState extends State<NotDoneList> {
           ),
         ),
         body: SafeArea(
-          child: Stream_deals(false),
+          child: Stream_deals(true),
         ),
       );
     });

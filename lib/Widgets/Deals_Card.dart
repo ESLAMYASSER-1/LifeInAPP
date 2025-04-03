@@ -174,7 +174,7 @@ class _Deals_WidgetState extends State<Deals_Widget> {
       decoration: BoxDecoration(
         color: Colors.white,
         image: DecorationImage(
-          image: AssetImage('images/${widget._deal.image}.png'),
+          image: AssetImage('images/deal_${widget._deal.image}.png'),
           fit: BoxFit.cover,
         ),
       ),

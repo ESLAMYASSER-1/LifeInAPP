@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lifeinapp/data/firestor.dart';
 
@@ -73,7 +72,7 @@ class _Add_DealState extends State<Add_Deal> {
     return Container(
       height: 180,
       child: ListView.builder(
-        itemCount: 4,
+        itemCount: 10,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return GestureDetector(
@@ -96,7 +95,10 @@ class _Add_DealState extends State<Add_Deal> {
                 margin: EdgeInsets.all(8),
                 child: Column(
                   children: [
-                    Image.asset('images/${index}.png'),
+                    Image.asset(
+                      'images/deal_${index}.png',
+                      fit: BoxFit.fill,
+                    ),
                   ],
                 ),
               ),

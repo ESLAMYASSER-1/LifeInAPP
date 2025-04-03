@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
 import '../Widgets/To_Do_Stream_notes.dart';
-import '../Widgets/To_Do_card.dart';
-import 'Main_Page.dart';
 import 'add_note_screen.dart';
 
 class NotDoneList extends StatefulWidget {

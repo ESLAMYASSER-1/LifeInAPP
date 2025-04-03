@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lifeinapp/model/notes_model.dart';
 import 'package:uuid/uuid.dart';
 
+import '../model/deals_model.dart';
+
 class Firestore_Datasource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<bool> AddNote(String subtitle, String title, int image) async {
     try {
@@ -53,6 +53,7 @@ class Firestore_Datasource {
   }
 
   Stream<QuerySnapshot> stream(bool isDone) {
+    print('@@@@@@@@@@@@@@@@');
     return _firestore
         // .collection('users')
         // .doc(_auth.currentUser!.uid)
@@ -141,7 +142,7 @@ class Firestore_Datasource {
     try {
       final notesList = snapshot.data!.docs.map((doc) {
         final data = doc.data() as Map<String, dynamic>;
-        return Note(
+        return Deal(
           data['id'],
           data['subtitle'],
           data['time'],

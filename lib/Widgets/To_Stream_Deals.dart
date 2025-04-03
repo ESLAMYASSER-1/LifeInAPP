@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../data/firestor.dart';
 import 'Deals_Card.dart';
-import 'To_Do_card.dart';
 
 class Stream_deals extends StatelessWidget {
   bool done;
@@ -18,6 +17,7 @@ class Stream_deals extends StatelessWidget {
             return CircularProgressIndicator();
           }
           final dealslist = Firestore_Datasource().getDeals(snapshot);
+          print(dealslist);
           return ListView.builder(
             shrinkWrap: true,
             itemBuilder: (context, index) {
