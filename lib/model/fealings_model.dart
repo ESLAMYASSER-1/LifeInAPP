@@ -1,9 +1,10 @@
 class Feel {
   String id;
-  String subtitle;
-  String title;
+  String text;
   String time;
-  int image;
-  bool isDon;
-  Feel(this.id, this.subtitle, this.time, this.image, this.title, this.isDon);
+  Feel(
+    this.id,
+    this.text,
+    this.time,
+  );
 }

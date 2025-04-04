@@ -60,17 +60,17 @@ class _Deals_WidgetState extends State<Deals_Widget> {
                             ),
                           ),
                         ),
-                        Checkbox(
-                          activeColor: custom_green,
-                          value: isDone,
-                          onChanged: (value) {
-                            setState(() {
-                              isDone = !isDone;
-                            });
-                            Firestore_Datasource()
-                                .isdone(widget._deal.id, isDone);
-                          },
-                        )
+                        // Checkbox(
+                        //   activeColor: custom_green,
+                        //   value: isDone,
+                        //   onChanged: (value) {
+                        //     setState(() {
+                        //       isDone = !isDone;
+                        //     });
+                        //     Firestore_Datasource()
+                        //         .isdone(widget._deal.id, isDone);
+                        //   },
+                        // )
                       ],
                     ),
                     Expanded(

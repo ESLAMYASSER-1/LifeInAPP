@@ -4,6 +4,7 @@ import 'package:lifeinapp/model/notes_model.dart';
 import 'package:uuid/uuid.dart';
 
 import '../model/deals_model.dart';
+import '../model/fealings_model.dart';
 
 class Firestore_Datasource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -53,7 +54,6 @@ class Firestore_Datasource {
   }
 
   Stream<QuerySnapshot> stream(bool isDone) {
-    print('@@@@@@@@@@@@@@@@');
     return _firestore
         // .collection('users')
         // .doc(_auth.currentUser!.uid)
@@ -114,7 +114,8 @@ class Firestore_Datasource {
     }
   }
 
-  Future<bool> AddDeal(String subtitle, String title, int image) async {
+  Future<bool> AddDeal(
+      String subtitle, bool isDon, String title, int image) async {
     try {
       var uuid = Uuid().v4();
       DateTime data = new DateTime.now();
@@ -126,7 +127,7 @@ class Firestore_Datasource {
           .set({
         'id': uuid,
         'subtitle': subtitle,
-        'isDon': false,
+        'isDon': isDon,
         'image': image,
         'time': '${data.hour}:${data.minute}',
         'title': title,
@@ -217,5 +218,51 @@ class Firestore_Datasource {
       print(e);
       return true;
     }
+  }
+
+  Future<bool> AddFeel(String text, String who) async {
+    try {
+      var uuid = Uuid().v4();
+      DateTime data = new DateTime.now();
+      await _firestore
+          // .collection('users')
+          // .doc(_auth.currentUser!.uid)
+          .collection('fealing_$who')
+          .doc(uuid)
+          .set({
+        'id': uuid,
+        'text': text,
+        'time': '${data.month}/${data.day}-${data.hour}:${data.minute}',
+      });
+      return true;
+    } catch (e) {
+      print(e);
+      return true;
+    }
+  }
+
+  List getFeel(AsyncSnapshot snapshot) {
+    try {
+      final feelsList = snapshot.data!.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        return Feel(
+          data['id'],
+          data['text'],
+          data['time'],
+        );
+      }).toList();
+      return feelsList;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  Stream<QuerySnapshot> streamFeel(String who) {
+    return _firestore
+        // .collection('users')
+        // .doc(_auth.currentUser!.uid)
+        .collection('fealing_$who')
+        .snapshots();
   }
 }

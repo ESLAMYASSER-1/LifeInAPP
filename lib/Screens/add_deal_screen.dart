@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lifeinapp/data/firestor.dart';
 
+import '../Widgets/Switch Widget.dart';
+
 Color custom_green = Color(0xff18DAA3);
 Color backgroundColors = Colors.grey.shade100;
 
@@ -18,6 +20,8 @@ class _Add_DealState extends State<Add_Deal> {
   FocusNode _focusNode1 = FocusNode();
   FocusNode _focusNode2 = FocusNode();
   int indexx = 0;
+  bool isDon = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +30,17 @@ class _Add_DealState extends State<Add_Deal> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            CustomSwitch(
+              value: isDon,
+              leftLabel: "Eslam",
+              rightLabel: "Salma",
+              onChanged: (newValue) {
+                setState(() {
+                  isDon = newValue;
+                });
+              },
+            ),
+            SizedBox(height: 20),
             title_widgets(),
             SizedBox(height: 20),
             subtite_wedgite(),
@@ -49,7 +64,8 @@ class _Add_DealState extends State<Add_Deal> {
             minimumSize: Size(170, 48),
           ),
           onPressed: () {
-            Firestore_Datasource().AddDeal(subtitle.text, title.text, indexx);
+            Firestore_Datasource()
+                .AddDeal(subtitle.text, isDon, title.text, indexx);
             Navigator.pop(context);
           },
           child: Text('add task'),
