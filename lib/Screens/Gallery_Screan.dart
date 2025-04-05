@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:google_fonts/google_fonts.dart'; // Optional, for fancy text
 
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});
@@ -25,11 +26,9 @@ class _GalleryPageState extends State<GalleryPage> {
   Future<void> _fetchImages() async {
     setState(() => isLoading = true);
     try {
-      // Fetch files from storage
       final storageResponse = await supabase.storage.from('images').list();
       final fileNames = storageResponse.map((file) => file.name).toList();
 
-      // Fetch metadata from the table
       final metadataResponse = await supabase
           .from('image_metadata')
           .select('file_name, description')
@@ -42,7 +41,7 @@ class _GalleryPageState extends State<GalleryPage> {
         );
         return {
           'url': supabase.storage.from('images').getPublicUrl(file.name),
-          'name': file.name,
+          'name': file.name, // Still fetched but not displayed in detail
           'description': metadata['description'] as String,
         };
       }).toList();
@@ -65,9 +64,8 @@ class _GalleryPageState extends State<GalleryPage> {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      // Show dialog to get description
       String? description = await _showDescriptionDialog(context);
-      if (description == null) return; // User canceled
+      if (description == null) return;
 
       setState(() => isLoading = true);
       try {
@@ -75,16 +73,13 @@ class _GalleryPageState extends State<GalleryPage> {
         String fileName =
             DateTime.now().millisecondsSinceEpoch.toString() + '.jpg';
 
-        // Upload the image
         await supabase.storage.from('images').upload(fileName, imageFile);
 
-        // Save metadata to the table
         await supabase.from('image_metadata').insert({
           'file_name': fileName,
           'description': description.isEmpty ? 'No description' : description,
         });
 
-        // Refresh the gallery
         await _fetchImages();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Image uploaded successfully!')),
@@ -150,47 +145,25 @@ class _GalleryPageState extends State<GalleryPage> {
                           MaterialPageRoute(
                             builder: (context) => ImageDetailPage(
                               imageUrl: imageData[index]['url']!,
-                              imageName: imageData[index]['name']!,
                               description: imageData[index]['description']!,
                             ),
                           ),
                         );
                       },
-                      child: Stack(
-                        children: [
-                          Image.network(
-                            imageData[index]['url']!,
-                            fit: BoxFit.cover,
-                            height: double.infinity,
-                            width: double.infinity,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            },
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Center(
-                                  child: Text('Error loading image'));
-                            },
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: Container(
-                              color: Colors.black54,
-                              padding: const EdgeInsets.all(4.0),
-                              child: Text(
-                                imageData[index]['description']!,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12.0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                      child: Image.network(
+                        imageData[index]['url']!,
+                        fit: BoxFit.cover,
+                        height: double.infinity,
+                        width: double.infinity,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        },
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Center(
+                              child: Text('Error loading image'));
+                        },
                       ),
                     );
                   },
@@ -204,16 +177,14 @@ class _GalleryPageState extends State<GalleryPage> {
   }
 }
 
-// Full-screen image view with name and description
+// Full-screen image view with fancy description
 class ImageDetailPage extends StatelessWidget {
   final String imageUrl;
-  final String imageName;
   final String description;
 
   const ImageDetailPage({
     super.key,
     required this.imageUrl,
-    required this.imageName,
     required this.description,
   });
 
@@ -223,49 +194,54 @@ class ImageDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Image Detail'),
       ),
-      body: Stack(
+      body: Column(
         children: [
-          Center(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.contain,
-              height: double.infinity,
-              width: double.infinity,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return const Center(child: CircularProgressIndicator());
-              },
-              errorBuilder: (context, error, stackTrace) {
-                return const Center(child: Text('Error loading image'));
-              },
+          Expanded(
+            child: Center(
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.contain,
+                height: double.infinity,
+                width: double.infinity,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const Center(child: CircularProgressIndicator());
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(child: Text('Error loading image'));
+                },
+              ),
             ),
           ),
-          Positioned(
-            bottom: 16.0,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.black54,
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Name: $imageName',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  const SizedBox(height: 4.0),
-                  Text(
-                    'Description: $description',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.0,
-                    ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            color:
+                Colors.black.withOpacity(0.7), // Dark background for contrast
+            child: Text(
+              description,
+              textAlign: TextAlign.center,
+              // style: GoogleFonts.pacifico(
+              //   // Fancy font via google_fonts
+              //   fontSize: 24.0,
+              //   color: Colors.white,
+              //   shadows: [
+              //     const Shadow(
+              //       blurRadius: 10.0,
+              //       color: Colors.purpleAccent,
+              //       offset: Offset(2.0, 2.0),
+              //     ),
+              //   ],
+              // ),
+              // Fallback style without google_fonts:
+              style: const TextStyle(
+                fontSize: 34.0,
+                color: Colors.white,
+                fontFamily: 'Lobster', // Requires font in pubspec.yaml
+                shadows: [
+                  Shadow(
+                    blurRadius: 10.0,
+                    color: Colors.blue,
+                    offset: Offset(2.0, 2.0),
                   ),
                 ],
               ),
