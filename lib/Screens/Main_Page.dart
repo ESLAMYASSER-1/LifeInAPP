@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import '../Widgets/Beautiful Button.dart';
+import '../Widgets/Jar Widget.dart';
 import 'Deals_Eslam.dart';
 import 'Deals_Salma.dart';
 import 'Feels_From_Eslam.dart';
@@ -186,10 +187,7 @@ class PagesState extends State<Main_Page> {
         ],
       );
     }),
-    const Text(
-      'Profile',
-      style: optionStyle,
-    ),
+    JarWidget(),
     Builder(builder: (context) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
