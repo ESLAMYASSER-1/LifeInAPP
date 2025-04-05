@@ -100,7 +100,7 @@ class _Task_WidgetState extends State<Task_Widget> {
       child: Row(
         children: [
           Container(
-            width: 90,
+            width: 120,
             height: 28,
             decoration: BoxDecoration(
               color: custom_green,

@@ -23,7 +23,7 @@ class Firestore_Datasource {
         'subtitle': subtitle,
         'isDon': false,
         'image': image,
-        'time': '${data.hour}:${data.minute}',
+        'time': '${data.month}/${data.day}-${data.hour}:${data.minute}',
         'title': title,
       });
       return true;
@@ -129,7 +129,7 @@ class Firestore_Datasource {
         'subtitle': subtitle,
         'isDon': isDon,
         'image': image,
-        'time': '${data.hour}:${data.minute}',
+        'time': '${data.month}/${data.day}-${data.hour}:${data.minute}',
         'title': title,
       });
       return true;

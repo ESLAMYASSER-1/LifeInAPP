@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:lifeinapp/Widgets/To_Stream_Deals.dart';
-import 'add_deal_screen.dart';
+import '../Widgets/To_Stream_Feels.dart';
 
-class DealsEslam extends StatefulWidget {
-  const DealsEslam({super.key});
+class FeelsFromSalma extends StatefulWidget {
+  const FeelsFromSalma({super.key});
 
   @override
-  State<DealsEslam> createState() => _DealsEslamState();
+  State<FeelsFromSalma> createState() => _DealsEslamState();
 }
 
 bool show = true;
 Color custom_green = Color(0xff18DAA3);
 Color backgroundColors = Colors.grey.shade100;
 
-class _DealsEslamState extends State<DealsEslam> {
+class _DealsEslamState extends State<FeelsFromSalma> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
@@ -29,20 +28,8 @@ class _DealsEslamState extends State<DealsEslam> {
           ),
         ),
         backgroundColor: backgroundColors,
-        floatingActionButton: Visibility(
-          visible: show,
-          child: FloatingActionButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Add_Deal(),
-              ));
-            },
-            backgroundColor: custom_green,
-            child: Icon(Icons.add, size: 30),
-          ),
-        ),
         body: SafeArea(
-          child: Stream_deals(false),
+          child: Stream_feel("Salma"),
         ),
       );
     });

@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../data/firestor.dart';
-import 'To_Do_card.dart';
+import 'Feels_message_Card.dart';
 
 class Stream_feel extends StatelessWidget {
   String who;
@@ -22,7 +21,7 @@ class Stream_feel extends StatelessWidget {
             itemBuilder: (context, index) {
               final feel = feelslist[index];
               print(feel);
-              return Task_Widget(feel);
+              return Feals_Widget(feel);
             },
             itemCount: feelslist.length,
           );

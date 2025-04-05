@@ -100,7 +100,7 @@ class _Deals_WidgetState extends State<Deals_Widget> {
       child: Row(
         children: [
           Container(
-            width: 90,
+            width: 120,
             height: 28,
             decoration: BoxDecoration(
               color: custom_green,

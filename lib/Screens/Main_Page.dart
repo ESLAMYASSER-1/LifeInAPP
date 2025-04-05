@@ -5,9 +5,13 @@ import 'package:line_icons/line_icons.dart';
 import '../Widgets/Beautiful Button.dart';
 import 'Deals_Eslam.dart';
 import 'Deals_Salma.dart';
+import 'Feels_From_Eslam.dart';
+import 'Feels_From_Salma.dart';
 import 'To_Do_List_Done.dart';
 import 'To_Do_List_not_Done.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'add_feel_screen.dart';
 
 Color custom_green = Color(0xff18DAA3);
 Color backgroundColors = Colors.grey.shade100;
@@ -108,14 +112,14 @@ class PagesState extends State<Main_Page> {
             child: Column(
               children: [
                 Text(
-                  'Always the tone of surprise.',
-                  style: beautifulTextStyle,
+                  'So when the time comes the boy must die?\nYes, yes he must die.\nYou\'ve kept him alive so that he can die at the proper moment.\nYou\'ve been raising him like a pig for slaughter\nDon’t tell me now that you\'ve grown to care for the boy\nLilly ?\nAfter all this time?\nAlways!',
+                  style: beautifulTextStyle.copyWith(fontSize: 20),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  '                Hermione Granger   Ron Weasley.',
+                  '                   Dumbledore     Severus Snape',
                   style: TextStyle(color: Colors.grey[500]),
                 ),
               ],
@@ -127,7 +131,9 @@ class PagesState extends State<Main_Page> {
               BeautifulButton(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => DealsEslam(),
+                    builder: (context) => Add_feel(
+                      who: "Eslam",
+                    ),
                   ));
                 },
                 icon: Icons.man_2,
@@ -138,7 +144,9 @@ class PagesState extends State<Main_Page> {
               BeautifulButton(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => DealsSalma(),
+                    builder: (context) => Add_feel(
+                      who: "Salma",
+                    ),
                   ));
                 },
                 icon: Icons.woman_2,
@@ -154,22 +162,22 @@ class PagesState extends State<Main_Page> {
               BeautifulButton(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => DealsEslam(),
+                    builder: (context) => FeelsFromSalma(),
                   ));
                 },
                 icon: Icons.man_2,
-                text: 'From Salma',
+                text: 'From Eslam',
                 colorm: Colors.pink.shade700,
                 colors: Colors.pink.shade100,
               ),
               BeautifulButton(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => DealsSalma(),
+                    builder: (context) => FeelsFromEslam(),
                   ));
                 },
                 icon: Icons.woman_2,
-                text: 'From Eslam',
+                text: 'From Salma',
                 colorm: Colors.blue.shade700,
                 colors: Colors.blue.shade100,
               ),
@@ -285,7 +293,7 @@ class PagesState extends State<Main_Page> {
                   text: 'Music',
                 ),
                 GButton(
-                  icon: LineIcons.clipboardList,
+                  icon: LineIcons.list,
                   text: 'To Do',
                 ),
                 GButton(
