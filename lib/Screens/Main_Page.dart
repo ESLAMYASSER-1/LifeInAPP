@@ -8,6 +8,7 @@ import 'Deals_Eslam.dart';
 import 'Deals_Salma.dart';
 import 'Feels_From_Eslam.dart';
 import 'Feels_From_Salma.dart';
+import 'Gallery_Screan.dart';
 import 'To_Do_List_Done.dart';
 import 'To_Do_List_not_Done.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,10 +45,7 @@ class PagesState extends State<Main_Page> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static final List<Widget> _Pages = <Widget>[
-    const Text(
-      'Likes',
-      style: optionStyle,
-    ),
+    GalleryPage(),
     const Text(
       'Search',
       style: optionStyle,
