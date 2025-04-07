@@ -83,7 +83,7 @@ class _Edit_Screen_DealsState extends State<Edit_Screen_Deals> {
     return Container(
       height: 180,
       child: ListView.builder(
-        itemCount: 4,
+        itemCount: 10,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return GestureDetector(
@@ -106,7 +106,7 @@ class _Edit_Screen_DealsState extends State<Edit_Screen_Deals> {
                 margin: EdgeInsets.all(8),
                 child: Column(
                   children: [
-                    Image.asset('images/${index}.png'),
+                    Image.asset('images/deal_${index}.png'),
                   ],
                 ),
               ),
