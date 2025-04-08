@@ -1,0 +1,2 @@
+B:/WORK/PROGRAMMING/Mobile/Life In APP/lifeinapp/android/app/.cxx/RelWithDebInfo/5m5rc638/x86_64/CMakeFiles/edit_cache.dir
+B:/WORK/PROGRAMMING/Mobile/Life In APP/lifeinapp/android/app/.cxx/RelWithDebInfo/5m5rc638/x86_64/CMakeFiles/rebuild_cache.dir

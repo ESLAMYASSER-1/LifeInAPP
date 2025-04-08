@@ -1,0 +1,2 @@
+B:/WORK/PROGRAMMING/Mobile/Life In APP/lifeinapp/android/app/.cxx/RelWithDebInfo/5m5rc638/armeabi-v7a/CMakeFiles/edit_cache.dir
+B:/WORK/PROGRAMMING/Mobile/Life In APP/lifeinapp/android/app/.cxx/RelWithDebInfo/5m5rc638/armeabi-v7a/CMakeFiles/rebuild_cache.dir
