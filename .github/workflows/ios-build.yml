@@ -1,0 +1,18 @@
+name: Build iOS
+on:
+  push:
+    branches: [ main ] # Runs when you push to the main branch
+jobs:
+  build:
+    runs-on: macos-latest # Uses a macOS environment
+    steps:
+      - uses: actions/checkout@v3 # Checks out your code
+      - uses: subosito/flutter-action@v2 # Sets up Flutter
+        with:
+          flutter-version: '3.7.2' # Match your Flutter version (check with `flutter --version`)
+      - run: flutter pub get # Installs dependencies
+      - run: flutter build ios --release #--no-codesign # Builds the iOS app
+      - uses: actions/upload-artifact@v3 # Saves the build output
+        with:
+          name: ios-build
+          path: build/ios/iphoneos/
