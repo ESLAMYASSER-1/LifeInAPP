@@ -46,7 +46,7 @@ class _SongListPageState extends State<SongListPage> {
               ),
               TextField(
                 controller: _songUrlController,
-                decoration: InputDecoration(labelText: 'Song URL'),
+                decoration: InputDecoration(labelText: 'Song URL (HTTPS only)'),
               ),
             ],
           ),
@@ -63,6 +63,14 @@ class _SongListPageState extends State<SongListPage> {
               final songUrl = _songUrlController.text.trim();
 
               if (name.isNotEmpty && image.isNotEmpty && songUrl.isNotEmpty) {
+                if (!songUrl.startsWith('https://')) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content: Text('Please use an HTTPS URL for the song')),
+                  );
+                  return;
+                }
+
                 try {
                   await Firestore_Datasource().addSong(name, image, songUrl);
                   _nameController.clear();
@@ -92,19 +100,22 @@ class _SongListPageState extends State<SongListPage> {
 
   Future<void> _playSong(String songUrl, String songName) async {
     try {
+      print('Attempting to play: $songUrl');
       await _audioPlayer.setAudioSource(
         AudioSource.uri(
           Uri.parse(songUrl),
           tag: MediaItem(
             id: songUrl,
             title: songName,
+            album: "My App",
             artUri: Uri.parse('https://via.placeholder.com/150'),
           ),
         ),
       );
       await _audioPlayer.play();
       setState(() => _currentSongUrl = songUrl);
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('Error playing song: $e\nStack trace: $stackTrace');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error playing song: $e')),
       );
