@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lifeinapp/data/firestor.dart';
 import '../Screens/edit_screen_Deals.dart';
 import '../model/deals_model.dart';
 

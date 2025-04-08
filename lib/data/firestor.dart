@@ -265,4 +265,29 @@ class Firestore_Datasource {
         .collection('fealing_$who')
         .snapshots();
   }
+
+  Stream<QuerySnapshot> getSongs() {
+    return _firestore.collection('songs').snapshots();
+  }
+
+  // Add a new song to Firestore
+  Future<void> addSong(String name, String image, String songUrl) async {
+    try {
+      await _firestore.collection('songs').add({
+        'name': name,
+        'image': image != "" ? image : "images/song.png",
+        'songurl': songUrl,
+      });
+    } catch (e) {
+      throw Exception('Error adding song: $e');
+    }
+  }
+
+  Future<void> deleteSong(String songId) async {
+    try {
+      await FirebaseFirestore.instance.collection('songs').doc(songId).delete();
+    } catch (e) {
+      throw Exception('Error deleting song: $e');
+    }
+  }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import '../Widgets/Beautiful Button.dart';
@@ -9,10 +8,10 @@ import 'Deals_Salma.dart';
 import 'Feels_From_Eslam.dart';
 import 'Feels_From_Salma.dart';
 import 'Gallery_Screan.dart';
+import 'Song_screen.dart';
 import 'To_Do_List_Done.dart';
 import 'To_Do_List_not_Done.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'add_feel_screen.dart';
 
 Color custom_green = Color(0xff18DAA3);
@@ -46,10 +45,7 @@ class PagesState extends State<Main_Page> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static final List<Widget> _Pages = <Widget>[
     GalleryPage(),
-    const Text(
-      'Search',
-      style: optionStyle,
-    ),
+    SongListPage(),
     Builder(builder: (context) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
