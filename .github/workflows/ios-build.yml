@@ -11,7 +11,7 @@ jobs:
         with:
           flutter-version: '3.7.2' # Match your Flutter version (check with `flutter --version`)
       - run: flutter pub get # Installs dependencies
-      - run: flutter build ios --release #--no-codesign # Builds the iOS app
+      - run: flutter build ios --release --no-codesign # Builds the iOS app
       - uses: actions/upload-artifact@v3 # Saves the build output
         with:
           name: ios-build
